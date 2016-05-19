@@ -1,9 +1,9 @@
 <?php
 namespace Savich\ApiSkeleton\Requests;
 
-use App\Http\Requests\Request;
+use Illuminate\Foundation\Http\FormRequest;
 
-abstract class ApiRequest extends Request
+abstract class ApiRequest extends FormRequest
 {
     public function response(array $errors)
     {
