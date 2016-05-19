@@ -11,6 +11,18 @@ class ResponseApi implements ResponseInterface
      * Success status
      */
     const STATUS_SUCCESS = 1;
+    /**
+     * Error token expires
+     */
+    const STATUS_EXPIRED = 2;
+    /**
+     * Error token invalid
+     */
+    const STATUS_INVALID = 3;
+    /**
+     * Error token not provided
+     */
+    const STATUS_NOT_PROVIDED = 4;
 
     public function send($result = [], $errors = [], $status = null, $newToken = null)
     {

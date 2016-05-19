@@ -1,7 +1,9 @@
 <?php
-namespace Savich\ApiSkeleton\Response;
+namespace Savich\ApiSkeleton\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Savich\ApiSkeleton\Response\ResponseApi;
+use Savich\ApiSkeleton\Response\ResponseInterface;
 
 class ResponseServiceProvider extends ServiceProvider
 {

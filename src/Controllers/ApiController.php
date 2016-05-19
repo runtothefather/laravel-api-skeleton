@@ -27,7 +27,7 @@ class ApiController extends Controller
      * Set guard driver
      * @var string
      */
-    protected $guard = 'api';
+    protected $guard = null;
 
     /**
      * BaseApiController constructor.
