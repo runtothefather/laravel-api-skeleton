@@ -3,6 +3,7 @@ namespace Savich\ApiSkeleton\Controllers;
 
 use Illuminate\Routing\Controller;
 use Savich\ApiSkeleton\Response\ResponseInterface;
+use Illuminate\Database\Eloquent\Model;
 
 class ApiController extends Controller
 {
@@ -28,6 +29,11 @@ class ApiController extends Controller
      * @var string
      */
     protected $guard = null;
+    
+    /**
+     * @var Model
+     */
+    private $user;
 
     /**
      * BaseApiController constructor.
@@ -47,12 +53,29 @@ class ApiController extends Controller
     }
 
     /**
-     * Add error message
-     * @param $message
+     * Get current login user
+     * @return Model
      */
-    protected function addError($message)
+    protected function user()
     {
-        $this->errors[] = $message;
+        if (is_null($this->user)) {
+            $this->user = \JWTAuth::parseToken()->toUser();
+        }
+        
+        return $this->user;
+    }
+    
+    /**
+     * Setting errors 
+     * @param array|string $errors
+     */
+    protected function addErrors($errors)
+    {
+        if (is_array($errors)) {
+            $this->errors = array_merge($this->errors, $errors);
+        } elseif (is_string($errors)) {
+            $this->errors[] = $errors;
+        }
     }
 
     /**
