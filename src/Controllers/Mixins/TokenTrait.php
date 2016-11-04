@@ -1,6 +1,7 @@
 <?php
 namespace Savich\ApiSkeleton\Controllers\Mixins;
 
+use Illuminate\Database\Eloquent\Model;
 use Savich\ApiSkeleton\Controllers\ApiController;
 use Savich\ApiSkeleton\Response\ResponseApi;
 use Savich\ApiSkeleton\Response\ResponseInterface;
@@ -22,7 +23,7 @@ trait TokenTrait
     {
         try {
             if (!empty($user)) {
-                $token = \JWTAuth::fromUser($user);
+                $token = $this->tokenFromUser($user);
             }
 
             if (empty($token)) {
@@ -32,11 +33,28 @@ trait TokenTrait
             return $this->response->send(['token' => null], ['Could not create token']);
         }
 
-        $userByToken = \JWTAuth::toUser($token);
+        $userByToken = $this->userByToken($token);
 
         event('tymon.jwt.valid', $userByToken);
 
         return $this->response->send($userByToken, [], ResponseApi::STATUS_SUCCESS, $token);
+    }
+
+    /**
+     * Getting model by api token
+     * @param string $token
+     */
+    protected function userByToken($token)
+    {
+        return \JWTAuth::toUser($token);
+    }
+
+    /**
+     * @param Model $user
+     */
+    protected function tokenFromUser($user)
+    {
+        return \JWTAuth::fromUser($user);
     }
 
     /**
