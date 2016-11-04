@@ -66,6 +66,15 @@ class ApiController extends Controller
     }
     
     /**
+     * Setting errors 
+     * @param array $errors
+     */
+    protected function addErrors(array $errors)
+    {
+        $this->errors = array_merge($this->errors, $errors);
+    }
+    
+    /**
      * Add error message
      * @param $message
      */
