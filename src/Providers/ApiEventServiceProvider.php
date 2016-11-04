@@ -23,12 +23,11 @@ class ApiEventServiceProvider extends ServiceProvider
     /**
      * Register any other events for your application.
      *
-     * @param  \Illuminate\Contracts\Events\Dispatcher  $events
      * @return void
      */
-    public function boot(DispatcherContract $events)
+    public function boot()
     {
-        parent::boot($events);
+        parent::boot();
 
         Event::listen('tymon.jwt.absent', function () {
             return $this->response->send([], ['Token not provided'], ResponseApi::STATUS_NOT_PROVIDED);
