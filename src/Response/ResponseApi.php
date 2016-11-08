@@ -49,14 +49,8 @@ class ResponseApi implements ResponseInterface
         if (is_array($errorList) && count($errorList)) {
             $resultErrorList = [];
 
-            foreach ($errorList as $error) {
-                if (is_array($error)) {
-                    $resultErrorList = array_merge($resultErrorList, $this->prepareErrorList($error));
-                } elseif (is_string($error)) {
-                    $resultErrorList[] = $error;
-                } else {
-                    continue;
-                }
+            foreach ($errorList as $fieldName => $errors) {
+                $resultErrorList[$fieldName] = $errors[0];
             }
 
             return $resultErrorList;
