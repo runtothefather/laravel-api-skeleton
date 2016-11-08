@@ -21,6 +21,6 @@
         "illuminate/http": "^5.2",
         "tymon/jwt-auth": "0.5.*",
         "illuminate/events": "^5.2",
-        "illuminate/database": "^5.3"
+        "illuminate/database": "^5.2"
     }
 }
