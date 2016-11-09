@@ -64,17 +64,22 @@ class ApiController extends Controller
         
         return $this->user;
     }
-    
+
     /**
-     * Setting errors 
+     * Setting errors
      * @param array|string $errors
+     * @param string $errorKey If passes string you can specify it key
      */
-    protected function addErrors($errors)
+    protected function addErrors($errors, $errorKey = null)
     {
         if (is_array($errors)) {
             $this->errors = array_merge($this->errors, $errors);
         } elseif (is_string($errors)) {
-            $this->errors[] = $errors;
+            if (is_null($errorKey)) {
+                $this->errors[] = $errors;
+            } else {
+                $this->errors[$errorKey] = $errors;
+            }
         }
     }
 
