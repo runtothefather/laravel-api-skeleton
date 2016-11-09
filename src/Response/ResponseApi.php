@@ -50,7 +50,11 @@ class ResponseApi implements ResponseInterface
             $resultErrorList = [];
 
             foreach ($errorList as $fieldName => $errors) {
-                $resultErrorList[$fieldName] = $errors[0];
+                if (is_array($errors)) {
+                    $resultErrorList[$fieldName] = array_first($errors);
+                } elseif (is_string($errors)) {
+                    $resultErrorList[$fieldName] = $errors;
+                };
             }
 
             return $resultErrorList;
